@@ -23,5 +23,17 @@ jobs:
       - name: Trivy file scan
         run: trivy fs . > trivyfs.txt
 
+      - name: Docker bulid and run
+        run: |
+          docker build -t tic-tac-toe .
+          docker tag tic-toe aniket1010/tic-tac-toe:latest
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME } } -P{ { serets.DOCKERHUB_TOKEN } }
+          docker push aniket1010/tic-tac-toe:latest
+
+          env:
+             DOCKER_CLI_ACI: 1
+
+        
+
               
         
